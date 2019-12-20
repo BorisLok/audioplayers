@@ -420,13 +420,16 @@ float _playbackRate = 1.0;
     NSLog(@"Error setting speaker: %@", error);
   }
   [[AVAudioSession sharedInstance] setActive:YES error:&error];
-  
 
   if (!playerInfo || ![url isEqualToString:playerInfo[@"url"]]) {
     if (isLocal) {
+        NSLog(@"is local");
       playerItem = [ [ AVPlayerItem alloc ] initWithURL:[ NSURL fileURLWithPath:url ]];
     } else {
-      playerItem = [ [ AVPlayerItem alloc ] initWithURL:[ NSURL URLWithString:url ]];
+        NSString *mimeType = @"video/mp4; codecs=\"avc1.42E01E, mp4a.40.2\"";
+        NSURL *_url = [[NSURL alloc] initWithString: url];
+        AVURLAsset * asset = [[AVURLAsset alloc] initWithURL: _url options:@{@"AVURLAssetOutOfBandMIMETypeKey": mimeType}];
+        playerItem = [ [AVPlayerItem alloc] initWithAsset: asset];
     }
       
     if (playerInfo[@"url"]) {
