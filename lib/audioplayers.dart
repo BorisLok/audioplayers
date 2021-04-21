@@ -593,4 +593,10 @@ class AudioPlayer {
 
     await Future.wait(futures);
   }
+
+  Future<void> setRecordAudio() async {
+    if (Platform.isIOS) {
+      return _invokeMethod('setRecordAudio');
+    }
+  }
 }
