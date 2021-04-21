@@ -599,4 +599,10 @@ class AudioPlayer {
       return _invokeMethod('setRecordAudio');
     }
   }
+
+  Future<void> setPlayAudio() async {
+	if (Platform.isIOS) {
+	  return _invokeMethod('setPlayAudio');
+	}
+  }
 }

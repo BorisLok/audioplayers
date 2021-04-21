@@ -253,9 +253,19 @@ float _playbackRate = 1.0;
 				@"setRecordAudio":
                   ^{
                       NSError *error = nil;
+                      
+					  BOOL success = [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryRecord withOptions:AVAudioSessionCategoryOptionDefaultToSpeaker|AVAudioSessionCategoryOptionAllowBluetooth error:&error];  
                         
-                      BOOL success = [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryRecord error:&error];
-                        
+                      if (!success) {
+                        NSLog(@"Error setting speaker: %@", error);
+                      }
+                  },
+				@"setPlayAudio":
+                  ^{
+                      NSError *error = nil;
+
+                      BOOL success = [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback withOptions:AVAudioSessionCategoryOptionMixWithOthers error:&error];
+
                       if (!success) {
                         NSLog(@"Error setting speaker: %@", error);
                       }
