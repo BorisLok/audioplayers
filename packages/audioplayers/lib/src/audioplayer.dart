@@ -497,6 +497,20 @@ class AudioPlayer {
     return result;
   }
 
+  Future<int> setRecordAudio() async {
+    if (Platform.isIOS) {
+      return _invokeMethod('setRecordAudio');
+    }
+    return 1;
+  }
+
+  Future<int> setPlayAudio() async {
+    if (Platform.isIOS) {
+      return _invokeMethod('setPlayAudio');
+    }
+    return 1;
+  }
+
   bool isLocalUrl(String url) {
     return url.startsWith('/') ||
         url.startsWith('file://') ||

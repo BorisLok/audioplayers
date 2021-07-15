@@ -252,6 +252,13 @@ public class SwiftAudioplayersPlugin: NSObject, FlutterPlugin {
                 enablePreviousTrackButton: enablePreviousTrackButton,
                 enableNextTrackButton: enableNextTrackButton
             )
+        } else if method == "setRecordAudio" {
+            let category = AVAudioSession.Category.record
+            configureAudioSession(category: category)
+        } else if method == "setPlayAudio" {
+            let category = AVAudioSession.Category.record
+            let options = AVAudioSession.CategoryOptions.mixWithOthers
+            configureAudioSession(category: category, options: options)
         } else {
             Logger.log("Called not implemented method: %@", method)
             result(FlutterMethodNotImplemented)
