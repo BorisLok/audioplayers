@@ -217,7 +217,7 @@ class WrappedMediaPlayer {
             let mimeType = "video/mp4; codecs=\"avc1.42E01E, mp4a.40.2\""
             let parsedUrl = isLocal ? URL.init(fileURLWithPath: url.deletingPrefix("file://")) : URL.init(string: url)!
             let assets = AVURLAsset(url: parsedUrl, options:["AVURLAssetOutOfBandMIMETypeKey": mimeType])
-            let playerItem = isLocal ? AVPlayerItem.init(url: parsedUrl) : AVPlayerItem(asset: asset)
+            let playerItem = isLocal ? AVPlayerItem.init(url: parsedUrl) : AVPlayerItem(asset: assets)
             playerItem.audioTimePitchAlgorithm = AVAudioTimePitchAlgorithm.timeDomain
             let player: AVPlayer
             if let existingPlayer = self.player {
